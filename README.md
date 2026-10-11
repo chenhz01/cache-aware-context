@@ -2,6 +2,8 @@ Prefix-cache health monitoring and attribution for context compression. Compress
 
 If you compress context and can't answer "why did my cache hit rate drop from 90% to 20%?", this is for you. If you never compress, you still get the monitoring panel for free.
 
+<p align="center"><img src="docs/demo.gif" alt="demo" width="720"></p>
+
 ## Problem
 
 Context compressors compete on smarter summaries. The metric almost nobody optimizes or even measures is **prefix-cache economics**: providers cache repeated prompt prefixes, so a compressor that rewrites the beginning of a conversation can save 50% of tokens while *increasing* total cost and latency by killing every cache hit. One compression plugin (ranxianglei/billion-context) made this constraint explicit — claiming ≤2% compression cost while keeping 95-97% prefix-cache hits — and shipped a diagnostic for it. The overlooked angle: cache hit rate is an *operable, attributable* metric, not a vendor statistic. Restated in our words: context engineering needs observability, not cleverness.
